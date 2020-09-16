@@ -1,0 +1,15 @@
+<%- include('partials/header'); -%>
+<div class="container">
+    <header class="jumbotron">
+        <h2>welcome to campgrounds page</h2>
+    </header>
+    <a href="/campgrounds/form">Add a new campground</a>
+    <% for (var i=0;i<campgrounds.length;i++){ %>
+        <div>
+            <h1><%= campgrounds[i].name %></h1> 
+            <img src="<%= campgrounds[i].image %>"> 
+        </div>
+        
+    <%} %>
+</div>
+ <%- include('partials/footer'); -%>
