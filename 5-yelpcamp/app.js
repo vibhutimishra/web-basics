@@ -8,6 +8,14 @@ app.set("view engine","ejs");
 var camp=[
     {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
     {name:"Granite Hill", image:"https://www.photosforclass.com/download/pb_2512944"},
+    {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
+    {name:"Granite Hill", image:"https://www.photosforclass.com/download/pb_2512944"},
+    {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
+    {name:"Granite Hill", image:"https://www.photosforclass.com/download/pb_2512944"},
+    {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
+    {name:"Granite Hill", image:"https://www.photosforclass.com/download/pb_2512944"},
+    {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
+    {name:"Granite Hill", image:"https://www.photosforclass.com/download/pb_2512944"},
 ];
 
 app.get("/",function(req,res){
