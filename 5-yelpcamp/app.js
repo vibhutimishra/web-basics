@@ -1,9 +1,36 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var app=express();
+var mongoose= require("mongoose");
+mongoose.connect("mongodb://localhost/mydb");
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
+
+// Schema Setup
+var campSchema = new mongoose.Schema(
+    {
+        name: String,
+        image: String
+    }
+);
+var camp = mongoose.model("camp",campSchema);
+
+camp.create(
+    {
+        name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"
+    },function(err,campground){
+        if(err){
+            console.log("Error");
+        }
+        else{
+            console.log("Item added");
+            console.log(campground);
+        }
+    }
+);
+
 
 var camp=[
     {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
