@@ -17,7 +17,7 @@ var campSchema = new mongoose.Schema(
 );
 var camp = mongoose.model("camp",campSchema);
 
-camp.create(
+/* camp.create(
     {
         name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"
     },function(err,campground){
@@ -29,10 +29,12 @@ camp.create(
             console.log(campground);
         }
     }
-);
+); */
 
 
-var camp=[
+
+
+var campArray=[
     {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
     {name:"Granite Hill", image:"https://www.photosforclass.com/download/pb_2512944"},
     {name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"},
@@ -50,7 +52,15 @@ app.get("/",function(req,res){
 });
 
 app.get("/campgrounds",function(req,res){
-     res.render("campground",{campgrounds:camp});
+    // get all the campgrounds from database
+    camp.find({},function(err,campgrounds){
+        if (err){
+            console.log("error");
+        }
+        else{
+            res.render("campground",{campgrounds:campgrounds});
+        }
+    });   
 });
 
 app.get("/campgrounds/form",function(req,res){
@@ -60,8 +70,14 @@ app.post("/campgrounds",function(req,res){
      var name=req.body.name;
      var url=req.body.image;
      var b={name:name, image:url}
-     camp.push(b);
-     res.redirect("/campgrounds");
+     camp.create(b,function(err,newElement){
+         if (err){
+            console.log(err);
+         }
+         else{
+            res.redirect("/campgrounds");
+         }
+     }); 
 });
 
 app.listen("3000",function(req,res){
