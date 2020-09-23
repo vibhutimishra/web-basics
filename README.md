@@ -1,1 +1,1 @@
-# javascript-basics
+# Web-basics implementation while Learning
