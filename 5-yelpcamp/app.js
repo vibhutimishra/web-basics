@@ -13,12 +13,12 @@ var campSchema = new mongoose.Schema(
     {
         name: String,
         image: String,
-        discription: String
+        description: String
     }
 );
 var camp = mongoose.model("camp",campSchema);
 
-camp.create(
+/* camp.create(
     {
         name:"salmon creet",
         image:"https://www.photosforclass.com/download/px_4268158",
@@ -32,7 +32,7 @@ camp.create(
             console.log(campground);
         }
     }
-);
+); */
 
 
 var campArray=[
@@ -59,7 +59,7 @@ app.get("/campgrounds",function(req,res){
             console.log("error");
         }
         else{
-            res.render("campground",{campgrounds:campgrounds});
+            res.render("index",{campgrounds:campgrounds});
         }
     });   
 });
@@ -70,7 +70,8 @@ app.get("/campgrounds/form",function(req,res){
 app.post("/campgrounds",function(req,res){
      var name=req.body.name;
      var url=req.body.image;
-     var b={name:name, image:url}
+     var desc= req.body.descript;
+     var b={name:name, image:url, description:desc}
      camp.create(b,function(err,newElement){
          if (err){
             console.log(err);
@@ -81,8 +82,16 @@ app.post("/campgrounds",function(req,res){
      }); 
 });
 
+// shows more info about any campground
 app.get("/campgrounds/:id",function(req,res){
-    res.send("This will be a show up page one day");
+    camp.findById(req.params.id,function(err, moreinfocampground){
+        if (err){
+            console.log(err);
+        }
+        else{
+            res.render("show",{campgrounds:moreinfocampground});
+        }
+    });
 });
 
 
