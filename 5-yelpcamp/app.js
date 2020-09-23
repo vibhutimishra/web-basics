@@ -12,14 +12,17 @@ app.set("view engine","ejs");
 var campSchema = new mongoose.Schema(
     {
         name: String,
-        image: String
+        image: String,
+        discription: String
     }
 );
 var camp = mongoose.model("camp",campSchema);
 
-/* camp.create(
+camp.create(
     {
-        name:"salmon creet",image:"https://www.photosforclass.com/download/px_4268158"
+        name:"salmon creet",
+        image:"https://www.photosforclass.com/download/px_4268158",
+        description: "Its a famous Creet in Miami"
     },function(err,campground){
         if(err){
             console.log("Error");
@@ -29,9 +32,7 @@ var camp = mongoose.model("camp",campSchema);
             console.log(campground);
         }
     }
-); */
-
-
+);
 
 
 var campArray=[
@@ -79,6 +80,11 @@ app.post("/campgrounds",function(req,res){
          }
      }); 
 });
+
+app.get("/campgrounds/:id",function(req,res){
+    res.send("This will be a show up page one day");
+});
+
 
 app.listen("3000",function(req,res){
  console.log("SERVER STARTED");
