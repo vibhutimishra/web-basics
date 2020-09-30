@@ -14,10 +14,10 @@ var blogSchema = new mongoose.Schema({
     body:String,
     created: { type:Date, default:Date.now }
 });
-var blog = mongoose.model("Blog",blogSchema);
+var blog = mongoose.model("Blog", blogSchema);
 
-# Restful-routes
-app.get("/")
+
+
 
 
 app.listen("3000",function(req,res){
