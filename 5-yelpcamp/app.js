@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require("body-parser");
 var app=express();
 var mongoose= require("mongoose");
-mongoose.connect("mongodb://localhost/mydb");
+mongoose.connect('mongodb://user:vibhuti.mishra09@gmail.com:27017/mydb', { useNewUrlParser: true })
 
 
 app.use(bodyParser.urlencoded({extended:true}));
