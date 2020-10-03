@@ -57,6 +57,21 @@ app.post("/blogs",function(req,res){
     });
 });
 
+app.get("/blogs/:id/edit",function(req,res){
+    blog.findById(req.params.id, function(err,foundblog){
+        if(err){
+            res.redirect("/blogs");
+        }
+        else{
+            res.render("edit.ejs", {blog:foundblog});
+        }
+    });
+    
+});
+app.put("/blogs/id",function(req,res){
+    res.send("Update Route");
+});
+
 app.listen("3000",function(req,res){
     console.log("Server started");
 });
