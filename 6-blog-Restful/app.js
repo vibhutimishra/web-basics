@@ -3,6 +3,7 @@ var app= express();
 var mongoose = require("mongoose");
 var ejs = require('ejs');
 var path=require("path");
+var methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const { request } = require("http");
 
@@ -10,6 +11,7 @@ const { request } = require("http");
 mongoose.connect("mongodb://localhost/mydb")
 app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 
 app.set('view engine', 'ejs');
 
@@ -19,11 +21,14 @@ var blogSchema = new mongoose.Schema({
     body:String,
     created: { type:Date, default:Date.now }
 });
+
 var blog = mongoose.model("blog", blogSchema);
 
 app.get("/",function(req,res){
     res.redirect("/blogs");
 });
+
+// shows all the blogs
 app.get("/blogs",function(req,res){
     blog.find({},function(err,blogs){
         if(err){
@@ -34,9 +39,13 @@ app.get("/blogs",function(req,res){
         }
     });
 });
+
+
+// shows the form to create a new post
 app.get("/blogs/new",function(req,res){
     res.render("new.ejs");
 });
+
 
 app.post("/blogs",function(req,res){
     var title = req.body.title;
@@ -57,6 +66,22 @@ app.post("/blogs",function(req,res){
     });
 });
 
+
+// shows the content in detail of a partiular post
+app.get("/blogs/:id",function(req,res){
+    blog.findById(req.params.id, function(err,foundblog){
+        if(err){
+            res.redirect("/blogs");
+        }
+        else{
+            res.render("show.ejs",{blog:foundblog});
+        }
+    });
+
+});
+
+
+// to edit any blog
 app.get("/blogs/:id/edit",function(req,res){
     blog.findById(req.params.id, function(err,foundblog){
         if(err){
@@ -65,9 +90,10 @@ app.get("/blogs/:id/edit",function(req,res){
         else{
             res.render("edit.ejs", {blog:foundblog});
         }
-    });
-    
+    });    
 });
+
+
 app.put("/blogs/id",function(req,res){
     res.send("Update Route");
 });

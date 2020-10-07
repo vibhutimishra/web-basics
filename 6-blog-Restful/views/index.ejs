@@ -7,13 +7,13 @@
                 <img src="<%= blogs[i].image %>"> 
                 <div class="caption">
                     <h3><%= blogs[i].title %></h3>
-                    <h3><%= blogs[i].body %></h3>
+                    <h3><%= blogs[i].body %>.....</h3>
                     <p><%= blogs[i].created %></p>
-                </div>
-                
+                    <a href="/blogs/<%= blogs[i]._id %>">Read More!</a>
+                </div>   
             </div> 
         </div>
     <%}%>
 </div> 
 
-<%- include('footer'); -%>
+<%- include('footer'); -%> 
