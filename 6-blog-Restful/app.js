@@ -94,8 +94,28 @@ app.get("/blogs/:id/edit",function(req,res){
 });
 
 
-app.put("/blogs/id",function(req,res){
-    res.send("Update Route");
+app.put("/blogs/:id",function(req,res){
+    blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err,updatedBlog){
+        if(err){
+            res.redirect("/blogs");
+        }
+        else{
+            console.log("no error");
+            res.redirect("/blogs/"+req.params.id);
+        }
+    });
+});
+
+//delete route
+app.delete("/blogs/:id",function(req,res){
+    blog.findByIdAndRemove(req.params.id,function(err){
+        if(err){
+            res.redirect("/blogs");
+        }
+        else{
+            res.redirect("/blogs");
+        }
+    });
 });
 
 app.listen("3000",function(req,res){
