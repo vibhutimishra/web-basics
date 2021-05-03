@@ -5,8 +5,9 @@ const shopPage = require('./routes/shop.js')
 const path = require('path');
 const rootdir = require('./utils/path.js')
 
-app.set('view engine','ejs  ')
 const app= express();
+app.set('view engine','ejs  ')
+
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use(bodyParser.urlencoded({extended:true}));
